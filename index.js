@@ -33,11 +33,22 @@ mongoose
   .then(() => {
     return Recipe.insertMany(data);
   })
+  .then((response)=>{
+    response.forEach((eachRecipe)=>{
+      console.log(eachRecipe.title);
+    })  
+  })
   .then(()=>{
     return Recipe.findOneAndUpdate({title:"Rigatoni alla Genovese"}, {duration:100},  {new : true})
   })
+  .then((response)=>{
+    console.log(response);
+  })
   .then(()=>{
     return Recipe.findOneAndDelete({title:"Carrot Cake"})
+  })
+  .then((response)=>{
+    console.log(response);
   })
   .then(() => {
     return mongoose.connection.close()
